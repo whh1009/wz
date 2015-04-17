@@ -1,6 +1,7 @@
 package wz.config;
 
 import com.jfinal.config.*;
+import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
@@ -9,6 +10,7 @@ import wz.controller.IndexController;
 import wz.controller.UserController;
 import wz.interceptor.LoginInterceptor;
 import wz.model.MenuModel;
+import wz.model.RoleModel;
 import wz.model.UserModel;
 
 public class WZConfig extends JFinalConfig {
@@ -35,6 +37,7 @@ public class WZConfig extends JFinalConfig {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
         me.add(arp);
         arp.addMapping("wz_user", "user_id", UserModel.class);
+        arp.addMapping("wz_role", "role_id", RoleModel.class);
         arp.addMapping("wz_menu", "menu_id", MenuModel.class);
     }
 
@@ -47,7 +50,13 @@ public class WZConfig extends JFinalConfig {
     @Override
     public void configHandler(Handlers me) {
         me.add(new ContextPathHandler("ctx"));
+    }
 
+
+    public void afterJFinalStart() {
+        //全局缓存角色信息
+        String roleXml = RoleModel.dao.getRoleXml();
+        JFinal.me().getServletContext().setAttribute("roleXml", roleXml);
     }
 
 }

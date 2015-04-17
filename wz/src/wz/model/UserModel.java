@@ -10,7 +10,7 @@ import wz.util.StringUtil;
 import java.util.List;
 
 public class UserModel extends Model<UserModel> {
-	public static UserModel userDao= new UserModel();
+	public static final UserModel dao= new UserModel();
 	
 	/**
 	 * 判断用户名是否重复
@@ -19,7 +19,7 @@ public class UserModel extends Model<UserModel> {
 	 */
 	public boolean checkUserName(String userName) {
 		String sql = "select * from wz_user where user_name ='"+userName+"'";
-		List<UserModel> tagUser =userDao.find(sql);
+		List<UserModel> tagUser = find(sql);
 		if(tagUser!=null&&!tagUser.isEmpty()){
 			return false;
 		}else{
@@ -32,7 +32,7 @@ public class UserModel extends Model<UserModel> {
 	 */
 	public UserModel login(String userName, String pwd) {
 		String sql="select * from wz_user where user_name = '"+userName+"' and user_pwd = '"+ StringUtil.MD5(pwd)+"'";
-		List<UserModel> tagUser =userDao.find(sql);
+		List<UserModel> tagUser = find(sql);
 		if(tagUser!=null&&!tagUser.isEmpty()){
 			return tagUser.get(0);
 		}else{

@@ -22,7 +22,7 @@ public class UserController extends Controller {
     public void login() {
         String userName = getPara("userName");
         String pwd = getPara("userPassword");
-        UserModel user = UserModel.userDao.login(userName, pwd);
+        UserModel user = UserModel.dao.login(userName, pwd);
         if (user != null) {
             log.info(user.get("user_name") + "登录系统");
             getSession().setAttribute("user", user);
@@ -39,7 +39,7 @@ public class UserController extends Controller {
         String userName = getPara("userName");
         String pwd = getPara("userPassword");
         UserModel user = new UserModel();
-        if (UserModel.userDao.checkUserName(userName)) {
+        if (UserModel.dao.checkUserName(userName)) {
             user.set("user_name", userName);
             user.set("user_password", pwd);
             user.set("user_roleid", 1);
@@ -65,7 +65,7 @@ public class UserController extends Controller {
     public void getUserList() {
         String userPage = StringUtil.ObjectToString(getPara("userList"));
         int page = Integer.parseInt(userPage);
-        renderJson(UserModel.userDao.getUserList(page));
+        renderJson(UserModel.dao.getUserList(page));
     }
 
     /**
@@ -74,7 +74,7 @@ public class UserController extends Controller {
      */
     public void getDelUser() {
         Integer userId = getParaToInt("delUserId", 0);
-        if (UserModel.userDao.deleteById(userId)) {
+        if (UserModel.dao.deleteById(userId)) {
             renderJson("1");
         } else {
             renderJson("0");

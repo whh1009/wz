@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="c3p0-0.9.1.2">
+    <CLASSES>
+      <root url="jar://E:/wz_lib/c3p0-0.9.1.2.jar!/" />
+      <root url="jar://E:/wz_lib/cos.jar!/" />
+      <root url="jar://E:/wz_lib/dom4j-1.6.1.jar!/" />
+      <root url="jar://E:/wz_lib/fastjson-1.1.33.jar!/" />
+      <root url="jar://E:/wz_lib/javax.servlet.jsp.jstl.jar!/" />
+      <root url="jar://E:/wz_lib/jaxen-1.1-beta-7.jar!/" />
+      <root url="jar://E:/wz_lib/jfinal-1.9-bin-with-src.jar!/" />
+      <root url="jar://E:/wz_lib/jstl-impl.jar!/" />
+      <root url="jar://E:/wz_lib/log4j-1.2.16.jar!/" />
+      <root url="jar://E:/wz_lib/mysql-connector-java-5.1.20-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://E:/wz_lib/jfinal-1.9-bin-with-src.jar!/" />
+    </SOURCES>
+  </library>
+</component>
