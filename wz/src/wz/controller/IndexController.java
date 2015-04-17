@@ -1,6 +1,7 @@
 package wz.controller;
 
 import com.jfinal.aop.ClearInterceptor;
+import com.jfinal.aop.ClearLayer;
 import com.jfinal.core.Controller;
 import org.apache.log4j.Logger;
 
@@ -12,7 +13,7 @@ public class IndexController extends Controller{
 
     Logger log = Logger.getLogger("");
 
-    @ClearInterceptor
+    @ClearInterceptor(ClearLayer.ALL)
     public void index(){
         render("/index.jsp");
     }
