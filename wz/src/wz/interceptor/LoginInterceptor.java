@@ -19,7 +19,6 @@ public class LoginInterceptor implements Interceptor {
 		if(user==null) {//没有登录，返回登录页面
 			ai.getController().render("/Login.jsp");
 		} else {
-			System.out.println("====放行===");
 			ai.invoke();
 		}
 		System.out.println("=====登录拦截器 end=====");

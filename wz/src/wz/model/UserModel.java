@@ -5,13 +5,25 @@ import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 import wz.config.Constrant;
-import wz.util.StringUtil;
 
 import java.util.List;
 
 public class UserModel extends Model<UserModel> {
 	public static final UserModel dao= new UserModel();
-	
+
+	/**
+	 * 登录
+	 */
+	public UserModel login(String userName, String pwd) {
+		String sql="select * from wz_user where user_name = '"+userName+"' and user_pwd = '"+ pwd+"'";
+		List<UserModel> tagUser = find(sql);
+		if(tagUser!=null&&!tagUser.isEmpty()){
+			return tagUser.get(0);
+		}else{
+			return null;
+		}
+	}
+
 	/**
 	 * 判断用户名是否重复
 	 * @param userName
@@ -27,18 +39,7 @@ public class UserModel extends Model<UserModel> {
 		}
 	}
 	
-	/**
-	 * 登录
-	 */
-	public UserModel login(String userName, String pwd) {
-		String sql="select * from wz_user where user_name = '"+userName+"' and user_pwd = '"+ StringUtil.MD5(pwd)+"'";
-		List<UserModel> tagUser = find(sql);
-		if(tagUser!=null&&!tagUser.isEmpty()){
-			return tagUser.get(0);
-		}else{
-			return null;
-		}
-	}
+
 	
 	/**
 	 * 获取用户列表

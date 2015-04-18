@@ -6,11 +6,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
   <head>
-    <title></title>
+    <title>首页</title>
+    <meta http-equiv="refresh" content="0;url=${ctx}/dashborder">
   </head>
   <body>
-    我是首页
+      <p>
+        <center><img src="${ctx}/images/loading.gif"></center>
+      </p>
   </body>
 </html>

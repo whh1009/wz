@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -74,7 +75,7 @@
 					$(".msg").html("对不起，用户名或密码有误");
 					$(".msg").show();
 				} else {
-					window.location.href = "${ctx}/Login.jsp";
+					document.location.reload();
 				}
 			}
 		});
@@ -95,6 +96,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="login-wrapper">
+				<div><img class="logo" src="${ctx}/images/logo/logo.png"></div>
 				<div class="box">
 					<div class="content-wrap">
 						<h3>图书采集系统</h3>

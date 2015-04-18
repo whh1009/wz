@@ -1,7 +1,10 @@
 package wz.controller;
 
+import com.jfinal.aop.ClearInterceptor;
+import com.jfinal.aop.ClearLayer;
 import com.jfinal.core.Controller;
 import org.apache.log4j.Logger;
+import wz.model.MenuModel;
 import wz.model.UserModel;
 import wz.util.StringUtil;
 
@@ -18,36 +21,31 @@ public class UserController extends Controller {
 
     /**
      * 登录
+     * 清空所有拦截器
      */
-    public void login() {
+    @ClearInterceptor(ClearLayer.ALL)
+    public void login() throws Exception{
         String userName = getPara("userName");
         String pwd = getPara("userPassword");
         UserModel user = UserModel.dao.login(userName, pwd);
         if (user != null) {
-            log.info(user.get("user_name") + "登录系统");
-            getSession().setAttribute("user", user);
+            log.info("【" + user.get("user_name") + "】登录系统");
+            setSessionAttr("user", user);
+            try{
+                setSessionAttr("menuNav", MenuModel.dao.getMenuNavByRoleId(user));
+            } catch(Exception e) {
+                log.error("生成权限菜单出错", e);
+                throw e;
+            }
             renderJson("1");//登录成功
         } else {
             renderJson("0");//登录失败
         }
     }
 
-    /**
-     * 注册
-     */
-    public void register() {
-        String userName = getPara("userName");
-        String pwd = getPara("userPassword");
-        UserModel user = new UserModel();
-        if (UserModel.dao.checkUserName(userName)) {
-            user.set("user_name", userName);
-            user.set("user_password", pwd);
-            user.set("user_roleid", 1);
-            user.save();
-            renderJson("1");//注册成功
-        } else {
-            renderJson("0");//注册失败
-        }
+    public void logout(){
+        removeSessionAttr("user");
+        this.forwardAction("index");
     }
 
     /**
