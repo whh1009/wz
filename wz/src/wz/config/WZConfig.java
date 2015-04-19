@@ -5,13 +5,13 @@ import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
-import wz.Route.BookRoute;
-import wz.Route.UserRoute;
 import wz.controller.DashBorderController;
 import wz.controller.IndexController;
 import wz.handle.JspHandle;
 import wz.interceptor.LoginInterceptor;
 import wz.model.*;
+import wz.route.BookRoute;
+import wz.route.UserRoute;
 
 public class WZConfig extends JFinalConfig {
 
@@ -68,6 +68,8 @@ public class WZConfig extends JFinalConfig {
         //全局缓存角色信息
 //        String roleXml = RoleModel.dao.getRoleXml();
 //        JFinal.me().getServletContext().setAttribute("roleXml", roleXml);
+
+
     }
 
 }
