@@ -10,8 +10,8 @@ import wz.controller.IndexController;
 import wz.handle.JspHandle;
 import wz.interceptor.LoginInterceptor;
 import wz.model.*;
-import wz.route.BookRoute;
-import wz.route.UserRoute;
+import wz.routes.BookRoute;
+import wz.routes.UserRoute;
 
 public class WZConfig extends JFinalConfig {
 
