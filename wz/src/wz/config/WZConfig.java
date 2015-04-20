@@ -1,6 +1,7 @@
 package wz.config;
 
 import com.jfinal.config.*;
+import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
@@ -49,6 +50,7 @@ public class WZConfig extends JFinalConfig {
         arp.addMapping("wz_menu", "menu_id", MenuModel.class);
         arp.addMapping("wz_role_menu", "role_menu_id", RoleMenuModel.class);
         arp.addMapping("wz_book", "book_id", BookModel.class);
+        arp.addMapping("wz_config", "config_id", ConfigModel.class);
     }
 
     @Override
@@ -68,8 +70,12 @@ public class WZConfig extends JFinalConfig {
         //全局缓存角色信息
 //        String roleXml = RoleModel.dao.getRoleXml();
 //        JFinal.me().getServletContext().setAttribute("roleXml", roleXml);
+        //全局缓存配置信息
+//        String wzConfigXml = ConfigModel.dao.getDbConfigXml();
+//        JFinal.me().getServletContext().setAttribute("wzConfigXml", wzConfigXml);
 
-
+        String columnMap = ColumnMap.getTableColumnXml();
+        JFinal.me().getServletContext().setAttribute("__COLUMN_MAP", columnMap);
     }
 
 }

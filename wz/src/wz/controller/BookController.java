@@ -19,12 +19,12 @@ public class BookController extends Controller{
     }
 
     public void bookListControl() throws Exception {
-        this.setAttr("showColumn", Constrant.SHOW_COLUMN);
+        setAttr("showColumn", Constrant.SHOW_COLUMN);
         render("BookListMan.jsp");
     }
 
     public void getBookListByPara() throws Exception {
         int pageNumber = getParaToInt("pageNumber", 1);
-        renderJson(JsonKit.toJson(BookModel.dao.getBookList(pageNumber)));
+        renderJson(JsonKit.toJson(BookModel.dao.getBookList(pageNumber, (String)getSessionAttr("showColumn"))));
     }
 }

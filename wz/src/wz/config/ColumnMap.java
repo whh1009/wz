@@ -309,7 +309,7 @@ public class ColumnMap {
      * @return
      */
     public static String getTableColumnXml() {
-        Map<String, String> map = bookTableColumnSubMap();
+        Map<String, String> map = bookTableColumnMap();
         String xml = "<root>";
         Iterator<Entry<String, String>> it = map.entrySet().iterator();
         while (it.hasNext()) {

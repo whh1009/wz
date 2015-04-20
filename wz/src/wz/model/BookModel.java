@@ -10,7 +10,10 @@ import wz.config.Constrant;
 public class BookModel extends Model<BookModel> {
     public static final BookModel dao = new BookModel();
 
-    public Page<BookModel> getBookList(int pageNumber) throws Exception{
-        return this.paginate(pageNumber, Constrant.PAGE_SIZE, "select " + Constrant.SHOW_COLUMN, " from wz_book where book_del_flag = 0");
+    public Page<BookModel> getBookList(int pageNumber, String showColumn) throws Exception{
+        if("".equals(showColumn)) {
+            showColumn = Constrant.SHOW_COLUMN;
+        }
+        return this.paginate(pageNumber, Constrant.PAGE_SIZE, "select " + showColumn, " from wz_book where book_del_flag = 0");
     }
 }

@@ -22,9 +22,10 @@ public class JspHandle extends Handler {
      */
     @Override
     public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-        if (target.endsWith(".jsp"))
-        HandlerKit.renderError404("errorJsp.html", request, response, isHandled);
-        else
-        nextHandler.handle(target, request, response, isHandled);
+        if (target.endsWith(".jsp")){
+            HandlerKit.renderError404("errorJsp.html", request, response, isHandled);
+        } else {
+            nextHandler.handle(target, request, response, isHandled);
+        }
     }
 }

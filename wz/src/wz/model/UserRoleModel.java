@@ -20,7 +20,7 @@ public class UserRoleModel extends Model<UserRoleModel> {
         if(list==null||list.isEmpty()){
             return 0;
         } else {
-            return list.get(0).get("role_id");
+            return list.get(0).getInt("role_id");
         }
     }
 }

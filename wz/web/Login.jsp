@@ -42,7 +42,7 @@
 	
 	function login() {
 		var userName = $("input[name='userModel.user_name']").val().trim();
-		var pwd = $("input[name='userModel.user_name']").val().trim();
+		var pwd = $("input[name='userModel.user_password']").val().trim();
 		if (userName == "") {
 			$(".msg").html("请输入用户名");
 			$(".msg").show();
