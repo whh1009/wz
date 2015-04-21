@@ -3,6 +3,8 @@
 <html>
 <head>
     <title></title>
+    <link href="${ctx}/css/showLoading.css" rel="stylesheet">
+    <script src="${ctx}/js/jquery.showLoading.min.js"></script>
     <style>
         .row{margin-top:1em;}
         body {
@@ -50,24 +52,43 @@
         }
 
         function contentFilter() {
+            if($("th input").length==0) {
+                addContentFilterText();
+                return;
+            }
             queryStr="";
             if($("th input").length>0) {
                 var queryXml="<root>";
                 $("th input").each(function() {
                     if($(this).val().trim()!=""){
                         queryXml+="<item columnName='"+$(this).attr("cusData")+"' columnVal='"+ $(this).val()+"' />";
-                        //queryStr+=
                     }
-                })
-                return queryXml+"</root>";
-            } else {
-                return "";
+                });
+                queryStr = queryXml+"</root>";
             }
-
+            bookList(1);
         }
 
         function exportExcel(){
-            alert("export excel");
+            $("body").showLoading();
+            $.ajax({
+                url:"bookInfoExportExcel",
+                method:"post",
+                data:{queryStr:queryStr},
+                success: function (data) {
+                    $("body").hideLoading();
+                    console.log(data);
+//                    if(data=="1"){
+//                        window.location.href="downExportExcel";
+//                    } else {
+//                        alert("生成EXCEL失败");
+//                    }
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown) {
+                    $("body").hideLoading();
+                    alert("导出EXCEL失败："+textStatus+" "+errorThrown);
+                }
+            });
         }
 
         function exportResource(){
@@ -78,7 +99,7 @@
             $.ajax({
                 url: "getBookListByPara",
                 method: "post",
-                data: {pageNumber: pageNumber},
+                data: {pageNumber: pageNumber, queryStr:queryStr},
                 beforeSend: function (XMLHttpRequest) {
                     $("#tableContent").html("<div class='aa'><img src='${ctx}/images/loading.gif' /></div>");
                 },
@@ -109,7 +130,7 @@
                     $("#tableFoot").html(tableFoot);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    $("#tableContent").html("<p class='text-danger'>" + textStatus + "  " + errorThrown + "</p>");
+                    $("#tableContent").html("<p class='text-danger'>"+ XMLHttpRequest + "  " + textStatus + "  " + errorThrown + "</p>");
                 }
             });
         }
