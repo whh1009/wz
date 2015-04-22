@@ -39,7 +39,7 @@ public class CreateExcel {
         for (int i = 0; i < bookList.size(); i++) {
             Row row = helloSheet.createRow(i + 1);
             for (int j = 0; j < exportColumnArray.length; j++) {
-                row.createCell(j).setCellValue(StringUtil.ObjectToString(bookList.get(0).get(exportColumnArray[j].trim())));
+                row.createCell(j).setCellValue(StringUtil.ObjectToString(bookList.get(i).get(exportColumnArray[j].trim())));
             }
         }
 
